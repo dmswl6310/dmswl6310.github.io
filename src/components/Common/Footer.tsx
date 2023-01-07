@@ -15,7 +15,7 @@ const Footer: FunctionComponent = function () {
   return (
     <FooterWrapper>
       Thank You for Visiting My Blog, Have a Good Day 😆
-      <br />© 2021 Developer Eunji, Powered By Gatsby.
+      <br />© 2023 Developer Eunji, Powered By Gatsby.
     </FooterWrapper>
   )
 }
