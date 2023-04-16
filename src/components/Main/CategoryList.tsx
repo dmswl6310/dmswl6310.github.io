@@ -28,7 +28,7 @@ const CategoryListWrapper = styled.div`
 
 const CategoryItem = styled(({ active, ...props }: GatsbyLinkProps) => (
   <Link {...props} />
-))<CategoryItemProps>`
+))`
   margin-right: 20px;
   padding: 5px 0;
   font-size: 18px;
@@ -39,6 +39,9 @@ const CategoryItem = styled(({ active, ...props }: GatsbyLinkProps) => (
     margin-right: 0;
   }
 `
+// CategoryList1 = ({selectedCategory, categoryList}:CategoryListProps)=>{
+//   return <div>test</div>
+// }
 
 const CategoryList: FunctionComponent<CategoryListProps> = function ({
   selectedCategory,
