@@ -1,5 +1,4 @@
 import React, { FunctionComponent, useMemo } from 'react'
-import React, { FunctionComponent, useMemo } from 'react'
 import styled from '@emotion/styled'
 import GlobalStyle from 'components/Common/GlobalStyle'
 import Footer from 'components/Common/Footer'
@@ -15,17 +14,9 @@ type IndexPageProps = {
   location: {
     search: string
   }
-  location: {
-    search: string
-  }
   data: {
     allMarkdownRemark: {
       edges: PostListItemType[]
-    }
-    file: {
-      childImageSharp: {
-        gatsbyImageData: IGatsbyImageData
-      }
     }
     file: {
       childImageSharp: {
@@ -37,12 +28,8 @@ type IndexPageProps = {
 
 const IndexPage: FunctionComponent<IndexPageProps> = function ({
   location: { search },
-  location: { search },
   data: {
     allMarkdownRemark: { edges },
-    file: {
-      childImageSharp: { gatsbyImageData },
-    },
     file: {
       childImageSharp: { gatsbyImageData },
     },
@@ -88,23 +75,12 @@ const IndexPage: FunctionComponent<IndexPageProps> = function ({
         categoryList={categoryList}
       />
       <PostList selectedCategory={selectedCategory} posts={edges} />
-      <CategoryList
-        selectedCategory={selectedCategory}
-        categoryList={categoryList}
-      />
-      <PostList selectedCategory={selectedCategory} posts={edges} />
       <Footer />
     </Container>
   )
 }
 
 export default IndexPage
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-`
 
 const Container = styled.div`
   display: flex;
@@ -123,9 +99,6 @@ export const getPostList = graphql`
           fields {
             slug
           }
-          fields {
-            slug
-          }
           frontmatter {
             title
             summary
@@ -138,11 +111,6 @@ export const getPostList = graphql`
             }
           }
         }
-      }
-    }
-    file(name: { eq: "profile-image" }) {
-      childImageSharp {
-        gatsbyImageData(width: 120, height: 120)
       }
     }
     file(name: { eq: "profile-image" }) {
