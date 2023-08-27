@@ -16,7 +16,6 @@ const ProfileImageWrapper = styled(GatsbyImage)`
   margin-bottom: 30px;
   border-radius: 50%;
 
-  // 기존은 가로세로 120px => 768px 이하면 80px
   @media (max-width: 768px) {
     width: 80px;
     height: 80px;
