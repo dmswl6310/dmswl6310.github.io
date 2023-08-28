@@ -31,6 +31,7 @@ const useInfiniteScroll = function (
     [selectedCategory],
   )
 
+  //const observer:IntersectionObserver
   const observer = new IntersectionObserver((entries, observer) => {
     if (!entries[0].isIntersecting) return
 
