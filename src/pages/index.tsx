@@ -9,12 +9,20 @@ import { PostListItemType } from 'types/PostItem.types'
 import { IGatsbyImageData } from 'gatsby-plugin-image'
 import queryString, { ParsedQuery } from 'query-string'
 import CategoryList, { CategoryListProps } from 'components/Main/CategoryList'
+import Template from 'components/Common/Template'
 
 type IndexPageProps = {
   location: {
     search: string
   }
   data: {
+    site: {
+      siteMetadata: {
+        title: string
+        description: string
+        siteUrl: string
+      }
+    }
     allMarkdownRemark: {
       edges: PostListItemType[]
     }
@@ -22,6 +30,7 @@ type IndexPageProps = {
       childImageSharp: {
         gatsbyImageData: IGatsbyImageData
       }
+      publicURL: string
     }
   }
 }
@@ -29,9 +38,13 @@ type IndexPageProps = {
 const IndexPage: FunctionComponent<IndexPageProps> = function ({
   location: { search },
   data: {
+    site: {
+      siteMetadata: { title, description, siteUrl },
+    },
     allMarkdownRemark: { edges },
     file: {
       childImageSharp: { gatsbyImageData },
+      publicURL,
     },
   },
 }) {
@@ -65,31 +78,34 @@ const IndexPage: FunctionComponent<IndexPageProps> = function ({
       ),
     [],
   )
-
   return (
-    <Container>
-      <GlobalStyle />
+    <Template
+      title={title}
+      description={description}
+      url={siteUrl}
+      image={publicURL}
+    >
       <Introduction profileImage={gatsbyImageData} />
       <CategoryList
         selectedCategory={selectedCategory}
         categoryList={categoryList}
       />
       <PostList selectedCategory={selectedCategory} posts={edges} />
-      <Footer />
-    </Container>
+    </Template>
   )
 }
 
 export default IndexPage
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-`
-
 export const getPostList = graphql`
   query getPostList {
+    site {
+      siteMetadata {
+        title
+        description
+        siteUrl
+      }
+    }
     allMarkdownRemark(
       sort: { order: DESC, fields: [frontmatter___date, frontmatter___title] }
     ) {
@@ -117,6 +133,13 @@ export const getPostList = graphql`
       childImageSharp {
         gatsbyImageData(width: 120, height: 120)
       }
+      publicURL
     }
   }
+`
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 `
