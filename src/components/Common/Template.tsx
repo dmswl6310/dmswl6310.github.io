@@ -17,7 +17,6 @@ const Container = styled.main`
   flex-direction: column;
   height: 100%;
 `
-
 const Template: FunctionComponent<TemplateProps> = function ({
   title,
   description,
@@ -45,8 +44,13 @@ const Template: FunctionComponent<TemplateProps> = function ({
         <meta name="twitter:title" content={title} />
         <meta name="twitter:description" content={description} />
         <meta name="twitter:image" content={image} />
-        <meta name="twitter:site" content="@사용자이름" />
-        <meta name="twitter:creator" content="@사용자이름" />
+        <meta name="twitter:site" content="@username" />
+        <meta name="twitter:creator" content="@username" />
+
+        <meta
+          name="google-site-verification"
+          content="FGJE3aR3D5ODy6mkH4NNCl-MlsMr5WdouofKYdZrDf0"
+        />
 
         <html lang="ko" />
       </Helmet>
