@@ -3,15 +3,21 @@ module.exports = {
     title: `개발 블로그`,
     description: `개인 블로그 입니다.`,
     author: `Eunji`,
-    siteUrl:'https://my-website-link.com',
+    siteUrl:'https://dmswl6310.github.io/',
   },
   plugins: [
     {
 resolve:'gatsby-plugin-canonical-urls',
 options:{
-  siteUrl:'https://my-website.com/',
+  siteUrl:'https://dmswl6310.github.io/',
   stripQueryString:true,
 },
+    },
+    {
+resolve:'gatsby-plugin-robots-txt',
+options:{
+  policy:[{userAgent:'*',allow:'/'}],
+}
     },
     'gatsby-plugin-sitemap',
     {
