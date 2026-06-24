@@ -1,5 +1,13 @@
 import Link from "next/link";
-import { experience, impacts, principles, profile, projects, skills } from "@/data/portfolio";
+import {
+  experience,
+  impacts,
+  principles,
+  processSteps,
+  profile,
+  projects,
+  skills
+} from "@/data/portfolio";
 
 function Stack({ items }: { items: string[] }) {
   if (!items.length) return null;
@@ -14,16 +22,28 @@ function Stack({ items }: { items: string[] }) {
 }
 
 export default function HomePage() {
+  const featuredProjects = projects.filter((project) => project.featured);
+  const otherProjects = projects.filter((project) => !project.featured);
+
   return (
     <main id="top">
       <section className="section hero" aria-labelledby="hero-title">
-        <div>
+        <div className="hero-copy">
           <p className="eyebrow">{profile.role}</p>
           <h1 id="hero-title">{profile.headline}</h1>
           <p className="lead">{profile.intro}</p>
+          <div className="process-strip" aria-label="작업 방식">
+            {processSteps.map((step, index) => (
+              <article className="process-step" key={step.label}>
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <b>{step.label}</b>
+                <p>{step.body}</p>
+              </article>
+            ))}
+          </div>
           <div className="hero-actions">
             <Link className="button primary" href="#projects">
-              프로젝트 보기
+              대표 프로젝트 보기
             </Link>
             <a className="button secondary" href={`mailto:${profile.email}`}>
               {profile.email}
@@ -33,10 +53,11 @@ export default function HomePage() {
 
         <aside className="impact-board" aria-label="대표 성과">
           {impacts.map((item) => (
-            <div className="signal-card" key={item.value}>
+            <Link className="signal-card" href={`/projects/${item.projectSlug}`} key={item.value}>
+              <span className="signal-project">{item.projectLabel}</span>
               <strong>{item.value}</strong>
               <span>{item.label}</span>
-            </div>
+            </Link>
           ))}
         </aside>
       </section>
@@ -73,18 +94,41 @@ export default function HomePage() {
           </p>
         </div>
 
-        <div className="project-grid">
-          {projects.map((project) => (
-            <Link className="project-banner" href={`/projects/${project.slug}`} key={project.slug}>
+        <div className="featured-grid">
+          {featuredProjects.map((project) => (
+            <Link className="project-banner featured" href={`/projects/${project.slug}`} key={project.slug}>
               <div>
-                <p className="project-kicker">{project.type}</p>
+                <div className="project-meta">
+                  <span>{project.category}</span>
+                  <span>{project.problemType}</span>
+                </div>
                 <h3>{project.title}</h3>
                 <p>{project.summary}</p>
                 <Stack items={project.stack} />
               </div>
               <div className="project-side">
                 <span className="project-highlight">{project.highlight}</span>
+                <span className="project-evidence">{project.evidence}</span>
                 <span className="project-more">자세히 보기</span>
+              </div>
+            </Link>
+          ))}
+        </div>
+
+        <div className="project-archive" aria-label="보조 프로젝트">
+          {otherProjects.map((project) => (
+            <Link className="archive-row" href={`/projects/${project.slug}`} key={project.slug}>
+              <div>
+                <div className="project-meta">
+                  <span>{project.category}</span>
+                  <span>{project.problemType}</span>
+                </div>
+                <h3>{project.title}</h3>
+                <p>{project.summary}</p>
+              </div>
+              <div className="archive-result">
+                <strong>{project.highlight}</strong>
+                <span>자세히 보기</span>
               </div>
             </Link>
           ))}
@@ -129,6 +173,18 @@ export default function HomePage() {
             <article className="skill-box" key={skill.title}>
               <h3>{skill.title}</h3>
               <p>{skill.body}</p>
+              <div className="related-links" aria-label={`${skill.title} 관련 프로젝트`}>
+                {skill.related.map((slug) => {
+                  const project = projects.find((item) => item.slug === slug);
+                  if (!project) return null;
+
+                  return (
+                    <Link href={`/projects/${project.slug}`} key={project.slug}>
+                      {project.problemType}
+                    </Link>
+                  );
+                })}
+              </div>
             </article>
           ))}
         </div>

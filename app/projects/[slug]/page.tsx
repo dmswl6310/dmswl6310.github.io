@@ -53,12 +53,27 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
     notFound();
   }
 
+  const projectSummary = [
+    { label: "역할", value: project.role },
+    { label: "기간", value: project.period },
+    { label: "기여", value: project.contribution },
+    { label: "문제 유형", value: project.problemType }
+  ];
+
   return (
     <main>
       <section className="section detail-hero">
         <p className="detail-kicker">{project.type}</p>
         <h1 className="detail-title">{project.title}</h1>
         <p className="lead">{project.summary}</p>
+        <div className="detail-summary-grid" aria-label="프로젝트 요약">
+          {projectSummary.map((item) => (
+            <div className="summary-chip" key={item.label}>
+              <span>{item.label}</span>
+              <strong>{item.value}</strong>
+            </div>
+          ))}
+        </div>
         <div className="pager">
           <Link className="button secondary" href="/#projects">
             프로젝트 목록
@@ -68,43 +83,49 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
 
       <section className="section detail-layout" aria-label="프로젝트 상세">
         <aside className="detail-aside">
-          <div className="detail-card">
-            <p className="detail-kicker">대표 성과</p>
+          <div className="detail-card result-card">
+            <p className="detail-kicker">핵심 성과</p>
             <h2>{project.highlight}</h2>
+            <p>{project.evidence}</p>
             <Stack items={project.stack} />
           </div>
           <figure className="media-slot" role="img" aria-label={project.media}>
             <span>{project.media}</span>
+            <figcaption>{project.mediaPurpose}</figcaption>
           </figure>
         </aside>
 
-        <div>
+        <div className="case-study">
           <section className="detail-section">
-            <h2>문제의 배경</h2>
+            <p className="section-number">01</p>
+            <h2>문제와 배경</h2>
             <div className="detail-card">
               <p>{project.context}</p>
             </div>
           </section>
 
           <section className="detail-section">
-            <h2>제가 중요하게 본 지점</h2>
+            <p className="section-number">02</p>
+            <h2>중요하게 본 지점</h2>
             <div className="thinking">
               <p>{project.thinking}</p>
             </div>
           </section>
 
           <section className="detail-section">
+            <p className="section-number">03</p>
             <h2>실행한 일</h2>
-            <ul className="detail-list">
+            <ol className="detail-list stepped">
               {project.actions.map((item) => (
                 <li key={item}>{item}</li>
               ))}
-            </ul>
+            </ol>
           </section>
 
           <section className="detail-section">
+            <p className="section-number">04</p>
             <h2>결과</h2>
-            <ul className="detail-list">
+            <ul className="detail-list result-list">
               {project.results.map((item) => (
                 <li key={item}>{item}</li>
               ))}
