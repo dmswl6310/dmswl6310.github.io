@@ -1,0 +1,5 @@
+1:"$Sreact.fragment"
+2:I[97367,["/_next/static/chunks/3rdqn8rx95pw7.js","/_next/static/chunks/14mrh2-p_w84d.js"],"ViewportBoundary"]
+3:I[97367,["/_next/static/chunks/3rdqn8rx95pw7.js","/_next/static/chunks/14mrh2-p_w84d.js"],"MetadataBoundary"]
+4:"$Sreact.suspense"
+0:{"rsc":["$","$1","h",{"children":[null,["$","$L2",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","div",null,{"hidden":true,"children":["$","$L3",null,{"children":["$","$4",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"위치 정확도와 배포 병목을 함께 개선한 암장 검색 서비스 | 황은지"}],["$","meta","1",{"name":"description","content":"PC 환경의 낮은 위치 정확도를 fallback 구조로 보완하고, 테스트 배포 병목을 자동화로 줄였습니다."}]]}]}]}],null]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"_7YgLDB6QpSCQZy0cejmO"}
