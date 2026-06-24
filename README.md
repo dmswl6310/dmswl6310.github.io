@@ -77,6 +77,8 @@ npm run build
 
 프로젝트를 추가하거나 수정할 때는 `projects` 배열을 먼저 확인합니다.
 
+전체 개선 순서와 점검 기준은 [PORTFOLIO_PLAN.md](PORTFOLIO_PLAN.md)에 정리해두었습니다.
+
 ## Commit Convention
 
 커밋 메시지는 아래 형식을 따릅니다.
