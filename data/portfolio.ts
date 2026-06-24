@@ -1,10 +1,18 @@
 export type Project = {
   slug: string;
   type: string;
+  category: string;
+  problemType: string;
+  featured: boolean;
   title: string;
   summary: string;
   highlight: string;
+  evidence: string;
   media: string;
+  mediaPurpose: string;
+  role: string;
+  period: string;
+  contribution: string;
   stack: string[];
   context: string;
   thinking: string;
@@ -29,15 +37,40 @@ export const profile = {
 export const impacts = [
   {
     value: "40%",
-    label: "입력 검증, 데이터 매핑 개선, 설치 안정화로 사용자 불만 감소에 기여"
+    label: "입력 검증, 데이터 매핑 개선, 설치 안정화로 사용자 불만 감소에 기여",
+    projectSlug: "medical-security-ux",
+    projectLabel: "의료기기 SW 보안 UX"
   },
   {
     value: "3초 → 1초",
-    label: "30MB 엑셀 결과 로딩을 행 단위 스트리밍 구조로 개선"
+    label: "30MB 엑셀 결과 로딩을 행 단위 스트리밍 구조로 개선",
+    projectSlug: "excel-streaming",
+    projectLabel: "엑셀 스트리밍 개선"
   },
   {
     value: "23개 언어",
-    label: "LinguiJS 기반 추출/검증 파이프라인으로 다국어 확장 시간 단축"
+    label: "LinguiJS 기반 추출/검증 파이프라인으로 다국어 확장 시간 단축",
+    projectSlug: "analysis-wizard",
+    projectLabel: "분석 설정 위자드"
+  }
+];
+
+export const processSteps = [
+  {
+    label: "문제 발견",
+    body: "사용자가 막히는 지점과 제품이 불안정해지는 순간을 먼저 찾습니다."
+  },
+  {
+    label: "판단",
+    body: "기능 추가보다 흐름, 성능, 운영 제약 중 무엇이 핵심인지 나눕니다."
+  },
+  {
+    label: "구현",
+    body: "검증, 상태 관리, 데이터 처리 구조를 사용자 흐름에 맞춰 정리합니다."
+  },
+  {
+    label: "검증",
+    body: "수치, 피드백, QA 결과로 개선이 실제로 이어졌는지 확인합니다."
   }
 ];
 
@@ -63,11 +96,19 @@ export const projects: Project[] = [
   {
     slug: "analysis-wizard",
     type: "Company · PCR Analysis Web App",
+    category: "Company",
+    problemType: "UX Flow",
+    featured: true,
     title: "분석 전 설정 흐름을 다시 설계한 3단계 위자드",
     summary:
       "8개 분석 설정 항목을 사용자 사고 흐름 기준의 3단계로 나누어 설정 오류와 학습 부담을 줄였습니다.",
     highlight: "설정 오류율 20% 감소",
+    evidence: "내부 클릭 로그와 사용자 피드백 기준",
     media: "[분석 설정 위자드 화면 캡처 필요]",
+    mediaPurpose: "8개 설정 항목이 3단계로 분리된 흐름과 단계별 검증 방식을 보여주기",
+    role: "프론트엔드 설계 및 구현",
+    period: "회사 프로젝트",
+    contribution: "설정 흐름 재구성, 검증 UI, 상태 관리 개선",
     stack: ["TypeScript", "React", "Electron", "Redux", "LinguiJS"],
     context:
       "기존 분석 프로그램은 시약, 분석 파일, 플레이트 수, 타겟 등 8개 항목을 한 화면에서 모두 설정해야 했습니다. 설정값 자체도 중요했지만, 더 큰 문제는 사용자가 지금 무엇을 결정해야 하는지 한눈에 이해하기 어렵다는 점이었습니다.",
@@ -87,11 +128,19 @@ export const projects: Project[] = [
   {
     slug: "excel-streaming",
     type: "Company · Performance",
+    category: "Company",
+    problemType: "Performance",
+    featured: true,
     title: "엑셀 로딩을 일괄 처리에서 스트리밍 구조로 변경",
     summary:
       "핵심 분석 파일 로딩을 행 단위 스트리밍 구조로 바꾸고, 비정상 값이 전체 처리를 멈추지 않도록 개선했습니다.",
     highlight: "30MB 로딩 3초 → 1초",
+    evidence: "30MB 분석 파일 로딩 시간 기준",
     media: "[성능최적화 이미지 필요]",
+    mediaPurpose: "일괄 로딩 구조와 행 단위 스트리밍 구조의 차이를 비교해서 보여주기",
+    role: "성능 병목 분석 및 데이터 처리 개선",
+    period: "회사 프로젝트",
+    contribution: "스트리밍 처리, 예외 방어, 컬럼 매핑 안정화",
     stack: ["Node.js fs", "Electron", "Data Mapping", "Error Guard"],
     context:
       "PCR 분석 결과 로딩은 프로그램의 핵심 기능이었습니다. 30MB 규모 파일을 다룰 때 화면이 멈추거나 로딩이 길어져 사용 흐름이 끊기는 문제가 있었습니다.",
@@ -111,11 +160,19 @@ export const projects: Project[] = [
   {
     slug: "medical-security-ux",
     type: "Company · Legacy Desktop App",
+    category: "Company",
+    problemType: "Security UX",
+    featured: true,
     title: "의료기기 SW의 보안 요구사항을 제품 UX로 풀어낸 작업",
     summary:
       "IVDR 대응을 위해 인증, 권한, 설치 안정화, 문서 추적성을 제품 사용 흐름 안에 녹였습니다.",
     highlight: "설치 오류 5건 → 0건",
+    evidence: "설치 테스트와 사용자 불만 개선 항목 기준",
     media: "[회원가입 프로세스 동영상 필요]",
+    mediaPurpose: "인증, 권한, 입력 검증, 설치 안정화가 제품 흐름 안에서 작동하는 방식 보여주기",
+    role: "레거시 앱 기능 개선 및 배포 안정화",
+    period: "회사 프로젝트",
+    contribution: "인증/권한 UX, 설치 검증, 문서 추적성 정리",
     stack: ["Java", "Swing", "RBAC", "Inno Setup", "DHF"],
     context:
       "의료기기 소프트웨어 보안 요건이 강화되면서 사용자 식별, 권한 분리, 변경 이력 추적이 필요했습니다. 기존 레거시 데스크톱 앱에는 인증 체계와 권한별 접근 제어가 충분하지 않았습니다.",
@@ -136,11 +193,19 @@ export const projects: Project[] = [
   {
     slug: "moduspot",
     type: "Personal · 모두스팟",
+    category: "Personal",
+    problemType: "Decision UX",
+    featured: false,
     title: "여러 출발지의 이동 시간을 공평하게 비교하는 서비스",
     summary:
       "다중 출발지와 목적지 조합을 비교해 약속 장소 결정의 피로를 줄이는 추천 서비스를 만들었습니다.",
     highlight: "FCP 2.2초 → 1.2초",
+    evidence: "초기 렌더링 성능 측정 기준",
     media: "[다중 경로 비교 UI 동영상 필요]",
+    mediaPurpose: "여러 출발지와 후보 장소의 이동 시간 편차를 비교하는 흐름 보여주기",
+    role: "개인 프로젝트 전체 설계 및 구현",
+    period: "개인 프로젝트",
+    contribution: "RSC 구조, 경로 비교 UX, SEO와 성능 개선",
     stack: ["Next.js", "RSC", "ODsay API", "Supabase", "SEO"],
     context:
       "약속 장소를 정할 때 누군가에게 이동 시간이 몰리는 문제가 자주 발생합니다. 모두스팟은 여러 출발지와 목적지를 비교해 상대적으로 공평한 후보를 찾는 서비스입니다.",
@@ -160,11 +225,19 @@ export const projects: Project[] = [
   {
     slug: "rajabong",
     type: "Personal · 라자봉",
+    category: "Personal",
+    problemType: "Concurrency",
+    featured: false,
     title: "중복 신청과 운영 비용을 줄인 봉사활동 커뮤니티",
     summary:
       "봉사활동 모집과 신청 흐름에서 동시성 문제와 이미지 비용 문제를 함께 방어했습니다.",
     highlight: "잘못된 신청 0건",
+    evidence: "신청 검증 케이스와 운영 시나리오 기준",
     media: "[봉사활동 신청 플로우 동영상 필요]",
+    mediaPurpose: "신청 버튼, 서버 검증, 모집 상태 방어가 함께 작동하는 흐름 보여주기",
+    role: "개인 프로젝트 전체 설계 및 구현",
+    period: "개인 프로젝트",
+    contribution: "서버 액션 검증, 이미지 압축, 운영 비용 관리",
     stack: ["Next.js", "Supabase", "Server Action", "Image Compression"],
     context:
       "봉사활동 참여 신청 시 주최자에게 승인 요청이 가는 구조였습니다. 통신 지연, 버튼 연타, 마감 기한 경과, 모집 인원 초과가 동시에 얽히면 모집 상태와 사용자 액션이 불일치할 수 있었습니다.",
@@ -185,11 +258,19 @@ export const projects: Project[] = [
   {
     slug: "orri",
     type: "Team · 오르리",
+    category: "Team",
+    problemType: "Location Accuracy",
+    featured: false,
     title: "위치 정확도와 배포 병목을 함께 개선한 암장 검색 서비스",
     summary:
       "PC 환경의 낮은 위치 정확도를 fallback 구조로 보완하고, 테스트 배포 병목을 자동화로 줄였습니다.",
     highlight: "위치 정확도 70% 향상",
+    evidence: "PC 위치 검색 정확도와 테스트 배포 시간 기준",
     media: "[위치기반 검색 화면 캡처 필요]",
+    mediaPurpose: "낮은 GPS 정확도를 감지하고 행정 단위 fallback으로 이어지는 검색 흐름 보여주기",
+    role: "프론트엔드 기능 구현 및 배포 자동화",
+    period: "팀 프로젝트",
+    contribution: "위치 fallback, 로그인 흐름 복원, 자동 배포 환경 구성",
     stack: ["Next.js", "TypeScript", "Styled Components", "GitHub Actions", "Vercel"],
     context:
       "기존 암장 검색은 이름을 직접 입력해야 했고, 주변 암장을 빠르게 찾기 어려웠습니다. 위치 기반 기능을 도입했지만 PC 환경의 Geolocation 정확도가 낮아 잘못된 위치 정보가 표시되는 문제가 있었습니다.",
@@ -229,18 +310,22 @@ export const experience = [
 export const skills = [
   {
     title: "Frontend Architecture",
-    body: "React, Next.js, TypeScript 기반으로 화면 흐름, 상태, 데이터 로딩 책임을 분리합니다."
+    body: "React, Next.js, TypeScript 기반으로 화면 흐름, 상태, 데이터 로딩 책임을 분리합니다.",
+    related: ["analysis-wizard", "moduspot"]
   },
   {
     title: "UX Engineering",
-    body: "위자드, 실시간 검증, skeleton UI, responsive layout으로 사용자의 막힘을 줄입니다."
+    body: "위자드, 실시간 검증, skeleton UI, responsive layout으로 사용자의 막힘을 줄입니다.",
+    related: ["analysis-wizard", "medical-security-ux"]
   },
   {
     title: "Performance",
-    body: "스트리밍, lazy loading, 디바운스, 번들 최적화로 체감 성능을 개선합니다."
+    body: "스트리밍, lazy loading, 디바운스, 번들 최적화로 체감 성능을 개선합니다.",
+    related: ["excel-streaming", "moduspot"]
   },
   {
     title: "Delivery",
-    body: "GitHub Actions, Vercel, 문서화, 테스트 산출물 관리로 배포와 협업 리듬을 만듭니다."
+    body: "GitHub Actions, Vercel, 문서화, 테스트 산출물 관리로 배포와 협업 리듬을 만듭니다.",
+    related: ["orri", "medical-security-ux"]
   }
 ];
