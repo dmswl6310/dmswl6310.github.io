@@ -22,7 +22,13 @@ body {
   margin: 0;
   color: var(--ink);
   background: var(--paper);
-  font-family: "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+  font-family:
+    "Pretendard Variable",
+    "Pretendard",
+    "Apple SD Gothic Neo",
+    "Malgun Gothic",
+    system-ui,
+    sans-serif;
   line-height: 1.65;
 }
 
